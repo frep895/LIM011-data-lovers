@@ -71,7 +71,7 @@ const showCharacters = (dataPotter) => {
       // parrafoCaracteristicas.appendChild(contenidoCaracteristicas);
 
       // llenando las caracterisiticas
-      const arrayCaracteristicas = [`Nombre: ${dato.name}`, `Especie: ${dato.species}`, `Genero: ${dato.gender}`, `Casa: ${dato.house}`, `Fecha de nacimiento: ${dato.dateOfBirth}`, `Ascendencia: ${dato.ancestry}`, `Color de ojos: ${dato.eyeColour}`, `Color de cabello: ${dato.hairColour}`, `Patronus: ${dato.patronus}`, `Actor: ${dato.actor}`];
+      const arrayCaracteristicas = [`Casa: ${dato.house}`, `Especie: ${dato.species}`, `Genero: ${dato.gender}`, `Fecha de nacimiento: ${dato.dateOfBirth}`, `Ascendencia: ${dato.ancestry}`, `Color de ojos: ${dato.eyeColour}`, `Color de cabello: ${dato.hairColour}`, `Patronus: ${dato.patronus}`, `Actor: ${dato.actor}`];
       for (let a = 0; a < arrayCaracteristicas.length; a += 1) {
         const saltoLinea = document.createElement('br');
         const caracteristica = document.createTextNode(arrayCaracteristicas[a]);
@@ -79,9 +79,9 @@ const showCharacters = (dataPotter) => {
         parrafoCaracteristicas.appendChild(caracteristica);
       }
 
-      // div MODALFOOTER
-      // const divModalFooter = document.createElement('div');
-      // divModalFooter.setAttribute('class', 'modalFooter');
+      const imagenCasa = document.createElement('img');
+      imagenCasa.setAttribute('src', dato.houseImage);
+      imagenCasa.setAttribute('class', 'imageCasa');
 
       spanClose.addEventListener('click', () => {
         document.body.removeChild(divModal);
@@ -94,6 +94,7 @@ const showCharacters = (dataPotter) => {
       });
 
       // anidando divs
+      divModalBody.appendChild(imagenCasa);
       divModalBody.appendChild(parrafoCaracteristicas);
       divTitulo.appendChild(tituloCaracteristicas);
       divTitulo.appendChild(spanClose);
@@ -171,13 +172,25 @@ role.addEventListener('change', (event) => {
   const chooseHouse = houseUno(POTTER, house.value);
   contentCharacter.innerHTML = showCharacters(chooseHouse);
 });
- */
+ Js */
 house.addEventListener('change', () => {
   document.querySelector('#contentCharacter').innerHTML = '';
   showCharacters(houseUno(POTTER, house.value));
 });
 
-// eslint-disable-next-line vars-on-top
-const str = 'casa world, welcome to the universe.';
-const n = str.startsWith('casa'); 
-console.log(n);
+// Boton refresh
+const botonRefresh = document.getElementById('refresh');
+
+const manejoReset = () => {
+  document.querySelector('#filtros').reset();
+};
+
+botonRefresh.addEventListener('click', manejoReset);
+
+// buscador
+const searchCharacter = document.getElementById('searchCharacter');
+searchCharacter.addEventListener('input', (event) => {
+  const findCharacter = search(POTTER, event.target.value.toLowerCase());
+  document.querySelector('#contentCharacter').innerHTML = '';
+  showCharacters(findCharacter);
+});

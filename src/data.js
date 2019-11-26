@@ -5,7 +5,7 @@ export const ascendente = (datos) => {
   const ordered = datos.sort((a, b) => {
     if (a.name > b.name) {
       return 1;
-      // eslint-disable-next-line no-else-return
+    // eslint-disable-next-line no-else-return
     } else {
       return -1;
     }
@@ -37,6 +37,7 @@ export const houseUno = (datos, houseName) => {
   return filterHouse;
 };
 
+// eslint-disable-next-line arrow-body-style
 export const search = (datos, searching) => {
   // eslint-disable-next-line arrow-parens
   return datos.filter(obj => obj.name.toLowerCase().startsWith(searching));
